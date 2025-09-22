@@ -1,7 +1,10 @@
 import axios from 'axios';
 import useAuthStore from './stores/auth-store';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE || '/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE || 
+  (import.meta.env.MODE === 'production' 
+    ? 'https://projectflow-pssc.onrender.com/api' 
+    : '/api');
 
 console.log('API Base URL:', API_BASE_URL);
 console.log('Environment:', import.meta.env.MODE);

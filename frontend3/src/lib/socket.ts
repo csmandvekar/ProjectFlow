@@ -11,7 +11,10 @@ class SocketService {
     }
 
     this.token = token;
-    this.socket = io(import.meta.env.VITE_SOCKET_URL || 'https://projectflow-pssc.onrender.com/', {
+    this.socket = io(import.meta.env.VITE_SOCKET_URL || 
+      (import.meta.env.MODE === 'production' 
+        ? 'https://projectflow-pssc.onrender.com' 
+        : 'http://localhost:5000'), {
       auth: {
         token: token
       },
