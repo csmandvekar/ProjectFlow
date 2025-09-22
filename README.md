@@ -2,6 +2,10 @@
 
 A full-stack MERN application that serves as a collaborative project management tool, allowing teams to manage projects, tasks, and collaborate in real-time.
 
+## Hosted Site
+
+https://projectflowfe.onrender.com/
+
 ## 🎥 Video Demo
 
 Watch the complete application demo: [ProjectFlow Demo Video](https://drive.google.com/file/d/1AE31lQcih6_aTSnp1HDpvBxs0DJshDtO/view?usp=sharing)
