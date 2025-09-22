@@ -29,11 +29,13 @@ const corsOptions = {
     'http://localhost:5173', 
     'http://localhost:8080',
     'https://projectflow-pssc.onrender.com', // Your backend URL
-    'https://projectflow-frontend.vercel.app', // Your actual frontend URL
+    'https://projectflowfe.onrender.com', // Your actual frontend URL
+    process.env.FRONTEND_URL, // Environment variable for frontend URL
     /^https:\/\/.*\.vercel\.app$/, // Vercel frontend URLs
     /^https:\/\/.*\.netlify\.app$/, // Netlify frontend URLs
-    /^https:\/\/.*\.github\.io$/ // GitHub Pages URLs
-  ],
+    /^https:\/\/.*\.github\.io$/, // GitHub Pages URLs
+    /^https:\/\/.*\.onrender\.com$/ // Render frontend URLs
+  ].filter(Boolean), // Remove undefined values
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
