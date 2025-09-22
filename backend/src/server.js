@@ -20,9 +20,20 @@ const searchRoutes = require('../routes/search');
 const app = express();
 const server = createServer(app);
 
+// Trust proxy for deployment platforms (Render, Vercel, etc.)
+app.set('trust proxy', 1);
+
 // CORS configuration
 const corsOptions = {
-  origin: ['http://localhost:5173', 'http://localhost:8080'],
+  origin: [
+    'http://localhost:5173', 
+    'http://localhost:8080',
+    'https://projectflow-pssc.onrender.com', // Your backend URL
+    'https://projectflow-frontend.vercel.app', // Your actual frontend URL
+    /^https:\/\/.*\.vercel\.app$/, // Vercel frontend URLs
+    /^https:\/\/.*\.netlify\.app$/, // Netlify frontend URLs
+    /^https:\/\/.*\.github\.io$/ // GitHub Pages URLs
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -44,7 +55,14 @@ connectDB();
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  max: process.env.NODE_ENV === 'production' ? 1000 : 100, // Higher limit for production
+  message: {
+    error: 'Too many requests from this IP, please try again later.'
+  },
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  // Trust proxy for accurate IP detection
+  trustProxy: true
 });
 
 // Middleware
