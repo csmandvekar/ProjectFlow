@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ProjectFlow Design System - Dark blue theme with Notion-like aesthetics */
+
+@layer base {
+  :root {
+    /* Core Dark Theme Colors - HSL format */
+    --background: 233 35% 15%; /* #1a1a2e - Dark blue-black */
+    --foreground: 0 0% 100%; /* #ffffff - White text */
+    
+    --surface: 228 42% 18%; /* #16213e - Slightly lighter blue */
+    --surface-hover: 228 42% 22%; /* Hover state for surfaces */
+    
+    --card: 228 42% 18%; /* #16213e - Card background */
+    --card-foreground: 0 0% 100%; /* White text on cards */
+    
+    --popover: 228 42% 18%;
+    --popover-foreground: 0 0% 100%;
+    
+    /* Primary Brand Colors */
+    --primary: 199 89% 48%; /* #0ea5e9 - Bright blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 199 89% 60%; /* Lighter version for glows */
+    
+    /* Accent Colors */
+    --accent: 187 85% 53%; /* #22d3ee - Cyan */
+    --accent-foreground: 233 35% 15%;
+    
+    /* Secondary Colors */
+    --secondary: 228 42% 25%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Muted Colors */
+    --muted: 215 25% 27%;
+    --muted-foreground: 215 14% 58%; /* #94a3b8 - Gray text */
+    
+    /* Status Colors */
+    --success: 158 64% 52%; /* #059669 - Green for active */
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 48 96% 53%; /* #eab308 - Yellow for on hold */
+    --warning-foreground: 233 35% 15%;
+    
+    --destructive: 0 84% 60%; /* #ef4444 - Red for cancelled */
+    --destructive-foreground: 0 0% 100%;
+    
+    --info: 199 89% 48%; /* #0ea5e9 - Blue for completed */
+    --info-foreground: 0 0% 100%;
+    
+    /* Border and Input */
+    --border: 228 42% 25%;
+    --input: 228 42% 20%;
+    --ring: 199 89% 48%;
+    
+    /* Radius */
+    --radius: 0.75rem;
+    
+    /* Sidebar Colors */
+    --sidebar-background: 233 35% 12%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 199 89% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 228 42% 20%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 228 42% 25%;
+    --sidebar-ring: 199 89% 48%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--surface-hover)));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--surface)), hsl(var(--card)));
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(var(--primary) / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(var(--primary) / 0.1), 0 2px 4px -1px hsl(var(--primary) / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(var(--primary) / 0.1), 0 4px 6px -2px hsl(var(--primary) / 0.05);
+    --shadow-glow: 0 0 20px hsl(var(--primary) / 0.3);
+    --shadow-card: 0 8px 25px -5px hsl(0 0% 0% / 0.3);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--surface));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+}
+
+@layer components {
+  /* Card hover effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-lg;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .card-hover:hover {
+    box-shadow: var(--shadow-glow), var(--shadow-card);
+  }
+  
+  /* Status pulse animation */
+  .status-pulse {
+    @apply animate-pulse;
+    animation: status-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+  
+  .gradient-subtle {
+    background: var(--gradient-subtle);
+  }
+  
+  /* Glass effect */
+  .glass {
+    backdrop-filter: blur(10px);
+    background: hsl(var(--surface) / 0.8);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+}
