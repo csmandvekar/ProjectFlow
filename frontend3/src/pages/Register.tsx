@@ -28,11 +28,13 @@ export default function Register() {
     try {
       await register(formData.name, formData.email, formData.password);
       navigate("/");
-    } catch (err) {
+    } catch (err: any) {
+      // Get the specific error message from the backend
+      const errorMessage = err?.response?.data?.message || error || "Check if your password is minimum 6 characters.";
       toast({
         variant: "destructive",
         title: "Registration failed",
-        description: error || "Please check your information and try again.",
+        description: errorMessage,
       });
     }
   };
