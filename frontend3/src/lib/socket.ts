@@ -11,7 +11,7 @@ class SocketService {
     }
 
     this.token = token;
-    this.socket = io(import.meta.env.VITE_API_URL || 'https://projectflow-pssc.onrender.com/', {
+    this.socket = io(import.meta.env.VITE_SOCKET_URL || 'https://projectflow-pssc.onrender.com/', {
       auth: {
         token: token
       },

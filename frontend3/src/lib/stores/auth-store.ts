@@ -124,14 +124,18 @@ const useAuthStore = create<AuthState>()(
       register: async (name: string, email: string, password: string) => {
         set({ loading: true, error: null });
         try {
+          console.log("Attempting registration for:", email);
           const response = await api.post('/auth/register', {
             name,
             email,
             password
           });
+          
+          console.log("Registration response:", response.data);
           const { token, user } = response.data;
 
           if (!token || !user) {
+            console.error("Missing token or user in response:", { token: !!token, user: !!user });
             throw new Error('Invalid response from server');
           }
 
